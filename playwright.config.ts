@@ -6,7 +6,7 @@ export default defineConfig({
   expect: { timeout: 5_000 },
   retries: process.env.CI ? 2 : 0,
   fullyParallel: true,
-  reporter: process.env.CI ? [['html', { open: 'never' }], ['list']] : [['html', { open: 'on-failure' }]],
+  reporter: [['html', { open: 'never' }], ['list']],
   use: {
     baseURL: 'https://qualityminds.pl/',
     locale: 'pl-PL',
