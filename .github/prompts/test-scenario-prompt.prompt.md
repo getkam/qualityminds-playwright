@@ -5,6 +5,7 @@ agent: playwright-test-generator
 1. Verify the scenario steps with MCP before implementation to confirm that the planned actions, locators, and flow are correct.
 
 2. Implement exactly one test from the next unimplemented scenario in #file:../../specs/TEST_PLAN.md even if it results in only a partial implementation of the scenario.
+ 2a. Test must follow all best practices from the generator log #file:../../.github/agents/playwright-test-generator.agent.md
 
 3. If the implemented test covers the scenario only partially or reveals missing details, update and enhance the test plan to reflect these gaps.
 

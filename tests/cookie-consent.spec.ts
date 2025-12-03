@@ -7,7 +7,7 @@ import { test, expect, BrowserContext } from '@playwright/test';
  * to ensure the cookie banner appears on every test run.
  * 
  * NOTE: The cookie consent dialog appears automatically on first page load.
- * The "Zarządzanie zgodą" button only appears AFTER user has made a choice,
+ * The "Manage consent" button only appears AFTER user has made a choice,
  * to allow reopening the preferences.
  */
 test.describe('Cookie Consent Management', { tag: ['@cookie-consent', '@gdpr', '@critical'] }, () => {
@@ -30,15 +30,15 @@ test.describe('Cookie Consent Management', { tag: ['@cookie-consent', '@gdpr', '
     await page.goto('https://qualityminds.com/pl/');
     await page.waitForLoadState('networkidle');
 
-    // The consent dialog should be visible immediately on first visit
+    // Verify consent dialog is visible immediately on first visit
     const consentDialog = page.getByRole('dialog', { name: 'Zarządzanie zgodą' });
     await expect(consentDialog).toBeVisible({ timeout: 10000 });
 
-    // Verify main action buttons are present
-    await expect(page.getByRole('button', { name: 'Zaakceptuj wszystko' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Odmowa' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Wyświetl preferencje' })).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Zamknij okienko' })).toBeVisible();
+    // Verify all main action buttons are present
+    await expect(page.getByRole('button', { name: 'Zaakceptuj wszystko' })).toBeVisible(); // Accept all
+    await expect(page.getByRole('button', { name: 'Odmowa' })).toBeVisible(); // Decline
+    await expect(page.getByRole('button', { name: 'Wyświetl preferencje' })).toBeVisible(); // View preferences
+    await expect(page.getByRole('button', { name: 'Zamknij okienko' })).toBeVisible(); // Close dialog
   });
 
   test('CCM-002: Accept all cookies closes dialog', { tag: ['@CCM-002', '@smoke'] }, async () => {
@@ -51,13 +51,13 @@ test.describe('Cookie Consent Management', { tag: ['@cookie-consent', '@gdpr', '
     const consentDialog = page.getByRole('dialog', { name: 'Zarządzanie zgodą' });
     await expect(consentDialog).toBeVisible({ timeout: 10000 });
 
-    // Click "Zaakceptuj wszystko" button
+    // Click "Accept all" button to accept all cookies
     await page.getByRole('button', { name: 'Zaakceptuj wszystko' }).click();
 
-    // Verify dialog closes
+    // Verify dialog closes after acceptance
     await expect(consentDialog).not.toBeVisible();
 
-    // Verify "Zarządzanie zgodą" button appears at bottom for reopening consent settings
+    // Verify "Manage consent" button appears at bottom for reopening consent settings
     await expect(page.getByRole('button', { name: 'Zarządzanie zgodą' })).toBeVisible();
   });
 
@@ -67,14 +67,14 @@ test.describe('Cookie Consent Management', { tag: ['@cookie-consent', '@gdpr', '
     await page.goto('https://qualityminds.com/pl/');
     await page.waitForLoadState('networkidle');
 
-    // Wait for consent dialog
+    // Wait for consent dialog to appear
     const consentDialog = page.getByRole('dialog', { name: 'Zarządzanie zgodą' });
     await expect(consentDialog).toBeVisible({ timeout: 10000 });
 
-    // Click "Wyświetl preferencje" to expand detailed options
+    // Click "View preferences" button to expand detailed cookie options
     await page.getByRole('button', { name: 'Wyświetl preferencje' }).click();
 
-    // Verify detailed cookie categories are now visible
+    // Verify detailed cookie categories are now visible (Functional, Statistics)
     await expect(page.getByText('Funkcjonalny').first()).toBeVisible();
     await expect(page.getByText('Statystyki').first()).toBeVisible();
   });
