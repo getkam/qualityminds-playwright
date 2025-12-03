@@ -84,7 +84,7 @@ The following test suites have been identified based on risk and priority.
 | ID | Scenario | Expected Result | Status |
 | :--- | :--- | :--- | :--- |
 | CCM-001 | Cookie consent dialog appears on first visit | Dialog with "Zaakceptuj wszystko", "Odmowa", "Wyświetl preferencje" buttons visible. | ✅ Automated |
-| CCM-002 | Accept all cookies | Dialog closes; "Zaakceptuj wszystko" action is recorded. | |
+| CCM-002 | Accept all cookies | Dialog closes; "Zarządzanie zgodą" button appears at bottom. | ✅ Automated |
 | CCM-003 | Decline cookies | Dialog closes; "Odmowa" action is recorded. | |
 | CCM-004 | View preferences | "Wyświetl preferencje" expands detailed options (Funkcjonalne, Statystyki). | ✅ Automated |
 | CCM-005 | Verify Functional cookies | "Zawsze aktywne" label is visible and disabled. | |

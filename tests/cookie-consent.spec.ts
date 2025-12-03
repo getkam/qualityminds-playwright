@@ -41,6 +41,26 @@ test.describe('Cookie Consent Management', { tag: ['@cookie-consent', '@gdpr', '
     await expect(page.getByRole('button', { name: 'Zamknij okienko' })).toBeVisible();
   });
 
+  test('CCM-002: Accept all cookies closes dialog', { tag: ['@CCM-002', '@smoke'] }, async () => {
+    const page = await context.newPage();
+    await context.clearCookies();
+    await page.goto('https://qualityminds.com/pl/');
+    await page.waitForLoadState('networkidle');
+
+    // Wait for consent dialog to appear
+    const consentDialog = page.getByRole('dialog', { name: 'Zarządzanie zgodą' });
+    await expect(consentDialog).toBeVisible({ timeout: 10000 });
+
+    // Click "Zaakceptuj wszystko" button
+    await page.getByRole('button', { name: 'Zaakceptuj wszystko' }).click();
+
+    // Verify dialog closes
+    await expect(consentDialog).not.toBeVisible();
+
+    // Verify "Zarządzanie zgodą" button appears at bottom for reopening consent settings
+    await expect(page.getByRole('button', { name: 'Zarządzanie zgodą' })).toBeVisible();
+  });
+
   test('CCM-004: View preferences expands detailed options', { tag: ['@CCM-004', '@regression'] }, async () => {
     const page = await context.newPage();
     await context.clearCookies();
