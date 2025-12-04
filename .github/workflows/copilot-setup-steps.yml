@@ -29,6 +29,6 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 
-    # Customize this step as needed
+    # Type-check TypeScript files
     - name: Build application
-      run: npx run build
+      run: npm run build
