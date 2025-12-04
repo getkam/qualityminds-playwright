@@ -104,3 +104,17 @@ or headed ( when you see how the test is running)
 Single file with tests - here home.spec.ts:
 
 `npx playwright test home.spec.ts`
+
+
+## Running Tests via GitHub Actions (Manual Workflow Dispatch)
+
+You can manually run Playwright tests via GitHub Actions:
+
+1. Go to your repository on GitHub
+2. Click on the **Actions** tab
+3. In the left sidebar, select **Playwright Tests** workflow
+4. Click the **Run workflow** button (on the right side)
+5. Select the branch you want to run tests on
+6. Click the green **Run workflow** button
+
+The workflow will execute and you can monitor its progress. After completion, you can download the `playwright-report` artifact to view test results.
