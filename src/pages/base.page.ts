@@ -11,7 +11,7 @@ export class BasePage {
 
   constructor(page: Page) {
     this.page = page;
-    this.nav = page.locator('.front-header-top nav');
+    this.nav = page.locator('.front-hder-top nav');
     this.subNav = page.locator('.front-header-bottom nav');
     this.subNavTestingQA = this.subNav.locator('li.menu-item-has-children').filter({ hasText: /Testowanie i kontrola jakości|Tesing QA/i });
     this.footer = page.locator('footer');
